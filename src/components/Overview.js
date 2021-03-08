@@ -1,26 +1,20 @@
 import React, {Component} from 'react';
+import Task from './Task';
 
 class Overview extends Component {
     constructor(props) {
         super(props)
     }
-
-    delete(id) {
-        this.props.deleteFunc(id);
-    }
       
     render() {
-        const {tasks} = this.props;
+        const {tasks, deleteFunc} = this.props;
 
         return (
             <ul>
                 {tasks.map((task, index) => {
                     return (
                         <div>
-                            <li key={task.id}>
-                                {index + 1}. {task.text}
-                                <button onClick={this.delete.bind(this, task.id)}>Delete</button>
-                            </li>
+                            <Task task={task} index={index} deleteFunc={deleteFunc}/>
                         </div>
                     );
                 })}
