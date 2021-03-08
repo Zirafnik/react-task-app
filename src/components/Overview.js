@@ -1,21 +1,26 @@
 import React, {Component} from 'react';
-import uniqid from 'uniqid';
 
 class Overview extends Component {
     constructor(props) {
         super(props)
     }
+
+    delete(id) {
+        this.props.deleteFunc(id);
+    }
       
     render() {
-        const {tasks, deleteFunc} = this.props;
+        const {tasks} = this.props;
 
         return (
             <ul>
                 {tasks.map((task, index) => {
                     return (
                         <div>
-                            <li key={uniqid()}>{index + 1}. {task}</li>
-                            {/*<button onClick={deleteFunc(index)}>Delete</button>*/}
+                            <li key={task.id}>
+                                {index + 1}. {task.text}
+                                <button onClick={this.delete.bind(this, task.id)}>Delete</button>
+                            </li>
                         </div>
                     );
                 })}
